@@ -13,16 +13,16 @@ const routes: Routes = [
     component: ProductListComponent,
   },
   {
-    path: ":id", 
-    component: ProductDetailComponent,
-  },
-  {
     path: "newproduct", 
     component: ProductNewComponent,
   },
   {
     path: "updateproduct/:id", 
     component: ProductUpdateComponent,
+  },
+  {
+    path: ":id", 
+    component: ProductDetailComponent,
   },
   {
     path: "**", 

@@ -18,5 +18,11 @@ export class ProductListComponent implements OnInit{
     console.log(this.productList);
   }
 
-  
+  changeSort(event: any){
+    console.log(event.value);
+  }
+
+  changeOrder(event: any){
+    console.log(event.value);
+  }
 }

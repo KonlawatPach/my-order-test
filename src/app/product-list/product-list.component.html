@@ -1,5 +1,18 @@
 <div class="product-list-component">
-    <div></div>
+    <div class="top-menu">
+        <button routerLink="/newproduct">+ เพิ่มสินค้าใหม่ของคุณ</button>
+        <div>
+            <select (change)="changeSort($event.target)">
+                <option value="name">ชื่อ</option>
+                <option value="ราคา">ราคา</option>
+            </select>
+            
+            <select (change)="changeOrder($event.target)">
+                <option value="ASC">มากไปน้อย</option>
+                <option value="DESC">น้อยไปมาก</option>
+            </select>
+        </div>
+    </div>
     <div class="display-product">
         <div *ngFor="let product of productList">
             <app-product-card
