@@ -2,6 +2,7 @@
     <img src="{{productObject.image}}" alt="รูปภาพ {{productObject.name}}">
     <div class="text-product">
         <h3>{{productObject.name}}</h3>
+        <p>{{productObject.seller}}</p>
         <p class="inline">
             <span [class.oldprice]="productObject.discount > 0">{{productObject.price}} บาท</span>
             <span *ngIf="productObject.discount > 0" class="discount showdiscount">{{productObject.price * (1-(productObject.discount/100))}} บาท</span>

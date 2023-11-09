@@ -1,1 +1,51 @@
-<p>product-new works!</p>
+<div class="new-product-component">
+    <h2>เพิ่มสินค้าใหม่ของคุณ</h2>
+
+    <p>
+        <span>ชื่อสินค้า : </span>
+        <input formControlName="name" type="text">
+    </p>
+
+    <img src="{{imageURL}}" alt="{{imageURL}}">
+    <p>
+        <span>url รูปภาพ : </span>
+        <input formControlName="image" (keyup)="imageInputOnchange($event.target)" type="text">
+    </p>
+
+    <p>
+        <span>ราคา (บาท) : </span>
+        <input formControlName="price" type="number" min="1">
+    </p>
+
+    <p>
+        <span>ส่วนลด (%) : </span>
+        <input formControlName="discount" type="text" max="99" min="0">
+    </p>
+
+    <p>
+        <span>รายละเอียด : </span>
+        <input formControlName="description" type="text">
+    </p>
+
+    <p>
+        <span>ชื่อผู้ขาย : </span>
+        <input formControlName="seller" type="text">
+    </p>
+
+    <p>
+        <span>ประเภท : </span>
+        <input formControlName="category" type="text">
+    </p>
+
+    <button type="submit">เพิ่มสินค้า</button>
+    <button type="reset" routerLink="/">ยกเลิก</button>
+    
+    <!-- <input 
+        formControlName="borrower"
+        [class.invalid]="borrowMotorForm.controls['borrower'].invalid && (borrowMotorForm.controls['borrower'].touched || isSubmitPressed)"
+        type="text"
+        autocomplete="on"
+        placeholder="Enter borrower name"
+        required
+    > -->
+</div>
