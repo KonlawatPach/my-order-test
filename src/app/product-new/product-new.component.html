@@ -19,7 +19,7 @@
 
     <p>
         <span>ส่วนลด (%) : </span>
-        <input formControlName="discount" type="text" max="99" min="0">
+        <input formControlName="discount" type="number" max="99" min="0">
     </p>
 
     <p>
@@ -37,8 +37,8 @@
         <input formControlName="category" type="text">
     </p>
 
-    <button type="submit">เพิ่มสินค้า</button>
-    <button type="reset" routerLink="/">ยกเลิก</button>
+    <button (click)="submitNewProduct()">เพิ่มสินค้า</button>
+    <button routerLink="/">ยกเลิก</button>
     
     <!-- <input 
         formControlName="borrower"

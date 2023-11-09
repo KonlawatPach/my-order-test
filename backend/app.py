@@ -125,7 +125,8 @@ def insertProduct():
   cursor.execute(sql_query, (next_id, name, imageblob, description, seller, price, discount, piece, category,))
   connect.commit()
   connect.close() 
-  return "insert successful"
+
+  return {'message' : "เพิ่มสินค้า "+name+" สำเร็จ"}
 
 
 # update product data
@@ -161,7 +162,7 @@ def updateProduct():
   cursor.execute(sql_query, (name, imageblob, description, seller, price, discount, piece, category, id_))
   connect.commit()
   connect.close() 
-  return "update successful"
+  return {'message' : "อัพเดทสินค้า "+name+" สำเร็จ"}
 
 
 # update sellcount ขายได้มาใช้ตัวนี้
@@ -206,9 +207,9 @@ def updateSellCount():
     cursor.execute(sql_query, (new_piece, new_salecount, new_rating, new_ratingcount, id_))
     connect.commit()
     connect.close() 
-    return "sell successful"
+    return {'message' : "การซื้อสินค้า "+name+" สำเร็จ"}
   else:
-    return "sell error"
+    return {'message' : "การซื้อ "+name+" เกิดข้อผิดพลาด"}
 
 # delete product by id
 @app.route("/deleteproduct", methods = ['DELETE'])
@@ -221,7 +222,7 @@ def deleteProduct():
   connect.execute("DELETE from Product WHERE ID = ?;", (id_,))
   connect.commit()
   connect.close() 
-  return "delete sucessfully"
+  return {'message' : "ลบสินค้า "+name+" สำเร็จ"}
 
 
 # DELETE TABLE
