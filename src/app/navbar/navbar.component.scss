@@ -15,6 +15,7 @@
     .right-side{
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
         align-items: center;
         width: 90%;
 
@@ -29,16 +30,30 @@
 
         .category-list{
             width: 98%;
-            margin-top: 4px;
+            margin-top: 10px;
             display: flex;
-            flex-direction: row;
+            justify-content: center;
             flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 20px;
+            gap: 0 20px;
             
             a{
+                width: 120px;
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+
                 display: block;
-                font-size: 14px;
+                font-size: 12px;
+                font-weight: 400;
+                padding: 6px 16px;
+                transition: 300ms;
+                border-radius: 20px;
+                text-align: center;
+            }
+            a:hover{
+                background-color: #6a5300;
+                color: white;
+                transition: 300ms;
             }
         }
     }

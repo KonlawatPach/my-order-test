@@ -1,5 +1,6 @@
 import sqlite3
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 database_path = './backend/test.db'
 
@@ -27,6 +28,26 @@ def initialDatabase():
   connect.close() 
 
 app = Flask(__name__)
+CORS(app)
+
+def packList(dataList):
+  newdata = []
+  for d in dataList:
+    newdata.append({
+      'ID' : d[0],
+      'name' : d[1],
+      'image' : d[2],
+      'description' : d[3],
+      'seller' : d[4],
+      'price' : d[5],
+      'discount' : d[6],
+      'piece' : d[7],
+      'salecount' : d[8],
+      'rating' : d[9],
+      'ratingcount' : d[10],
+      'category' : d[11]
+    })
+  return newdata
 
 # test active server
 @app.route("/")
@@ -39,8 +60,9 @@ def selectAllProduct():
   connect = sqlite3.connect(database_path)
   data = connect.execute('SELECT * FROM Product ORDER BY price;')
   data = list(data)
-  connect.close() 
-  return jsonify(data)
+  data = packList(data)
+  connect.close()
+  return data
 
 # get data by id
 @app.route("/getproduct", methods = ['GET'])
@@ -52,8 +74,9 @@ def selectProductwithID():
     'SELECT * FROM Product WHERE id = ?;', (id_,)
   )
   data = list(data)
+  data = packList(data)
   connect.close() 
-  return jsonify(data)
+  return data
 
 # get data by category
 @app.route("/getproductlist", methods = ['GET'])
@@ -65,8 +88,9 @@ def selectProductwithCategory():
     'SELECT * FROM Product WHERE category = ? ORDER BY price', (category,)
   )
   data = list(data)
-  connect.close() 
-  return jsonify(data)
+  data = packList(data)
+  connect.close()
+  return data
 
 
 # new product
