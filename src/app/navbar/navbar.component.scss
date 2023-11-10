@@ -8,7 +8,7 @@
     height: max-content;
 
     .icon-img{
-        width: 10%;
+        width: 100px;
         height: auto;
         cursor: pointer;
     }
@@ -32,17 +32,18 @@
         .category-list{
             width: 98%;
             margin-top: 10px;
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
             justify-content: center;
-            flex-wrap: wrap;
             gap: 0 20px;
             
             a{
-                width: 120px;
+                width: 116px;
                 color: black;
                 text-decoration: none;
                 cursor: pointer;
 
+                justify-self: center;
                 display: block;
                 font-size: 12px;
                 font-weight: 400;
@@ -55,6 +56,16 @@
                 background-color: #6a5300;
                 color: white;
                 transition: 300ms;
+            }
+        }
+        @media only screen and (max-width: 1080px) {
+            .category-list{
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media only screen and (max-width: 640px) {
+            .category-list{
+                grid-template-columns: repeat(2, 1fr);
             }
         }
     }

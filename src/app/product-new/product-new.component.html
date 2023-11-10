@@ -4,8 +4,10 @@
         
         <form [formGroup]="newProductForm" (ngSubmit)="submitNewProduct()">
             <div class="two-column">
-                <img src="{{imageURL}}" alt="URL ที่ระบุไม่มีภาพของสินค้า">
+                <img class="width-screen-image" src="{{imageURL}}" alt="URL ที่ระบุไม่มีภาพของสินค้า">
                 <div class="forminput">
+                    <img class="mobile-screen-image" src="{{imageURL}}" alt="URL ที่ระบุไม่มีภาพของสินค้า">
+
                     <p>
                         <span>ชื่อสินค้า : </span>
                         <input 
