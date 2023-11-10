@@ -8,6 +8,7 @@
                 <div class="forminput">
                     <img class="mobile-screen-image" src="{{imageURL}}" alt="URL ที่ระบุไม่มีภาพของสินค้า">
 
+                    <p class="alert-text" *ngIf="newProductForm.controls['name'].invalid && newProductForm.controls['name'].touched">**กรุณาระบุชื่อสินค้า**</p>
                     <p>
                         <span>ชื่อสินค้า : </span>
                         <input 
@@ -18,7 +19,8 @@
                             [class.invalid]="newProductForm.controls['name'].invalid && newProductForm.controls['name'].touched"
                         >
                     </p>
-            
+                    
+                    <p class="alert-text" *ngIf="newProductForm.controls['image'].invalid && newProductForm.controls['image'].touched">**กรุณาระบุ URL รูปภาพ**</p>
                     <p>
                         <span>url รูปภาพ : </span>
                         <input
@@ -30,7 +32,8 @@
                             [class.invalid]="newProductForm.controls['image'].invalid && newProductForm.controls['image'].touched"
                         >
                     </p>
-            
+                    
+                    <p class="alert-text" *ngIf="newProductForm.controls['price'].invalid && newProductForm.controls['price'].touched">**กรุณาระบุราคา (ต้องมีค่ามากกว่า 0)**</p>
                     <p>
                         <span>ราคา (บาท) : </span>
                         <input 
@@ -43,6 +46,7 @@
                         >
                     </p>
                     
+                    <p class="alert-text" *ngIf="newProductForm.controls['discount'].invalid && newProductForm.controls['discount'].touched">**กรุณาระบุส่วนลด (ระหว่าง 0 ถึง 99)**</p>
                     <p>
                         <span>ส่วนลด (%) : </span>
                         <input 
@@ -56,17 +60,19 @@
                         >
                     </p>
                     
+                    <p class="alert-text" *ngIf="newProductForm.controls['description'].invalid && newProductForm.controls['description'].touched">**กรุณาระบุรายละเอียด**</p>
                     <p>
                         <span>รายละเอียด : </span>
-                        <input 
+                        <textarea 
                             autocomplete="off" 
                             required 
                             formControlName="description" 
                             type="text"
                             [class.invalid]="newProductForm.controls['description'].invalid && newProductForm.controls['description'].touched"
-                        >
+                        ></textarea>
                     </p>
                     
+                    <p class="alert-text" *ngIf="newProductForm.controls['seller'].invalid && newProductForm.controls['seller'].touched">**กรุณาระบุชื่อผู้ขาย**</p>
                     <p>
                         <span>ชื่อผู้ขาย : </span>
                         <input 
@@ -77,8 +83,7 @@
                             [class.invalid]="newProductForm.controls['seller'].invalid && newProductForm.controls['seller'].touched"
                         >
                     </p>
-                        
-            
+                    
                     <p>
                         <span>ประเภท : </span>
                         <select formControlName="category">

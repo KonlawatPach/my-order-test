@@ -5,7 +5,7 @@
 
     .two-column{
         display: flex;
-        gap: 20px;
+        gap: 10px;
 
         img{
             width: 400px;
@@ -19,6 +19,8 @@
             display: block;
         }
         .mobile-screen-image{
+
+            margin-bottom: 20px;
             display: none;
         }
 
@@ -31,13 +33,25 @@
             }
         }
 
+        .alert-text{
+            font-size: 12px;
+            color: red;
+            margin: 0;
+        }
         p{
-            margin: 10px 0;
-            select, input{
+            display: flex;
+            gap: 10px;
+            margin: 0 0 10px 0;
+            
+            select, input, textarea{
                 width: 200px;
                 height: 20px;
                 border-radius: 10px;
                 border: 1px black solid;
+            }
+            textarea{
+                width: 260px;
+                height: 160px;
             }
             .invalid{
                 border: 1px red solid;
