@@ -11,7 +11,9 @@ export class ProductCardComponent implements OnInit {
   constructor() {}
 
   async ngOnInit() {
-    
+    this.productObject.discount = (this.productObject.price * (1-(this.productObject.discount/100))).toFixed(2)
   }
+
+  
   
 }

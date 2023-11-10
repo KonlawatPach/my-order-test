@@ -1,51 +1,51 @@
 <div class="new-product-component">
     <h2>เพิ่มสินค้าใหม่ของคุณ</h2>
 
-    <p>
-        <span>ชื่อสินค้า : </span>
-        <input formControlName="name" type="text">
-    </p>
+    <form [formGroup]="newProductForm" (ngSubmit)="submitNewProduct()">
+        <p>
+            <span>ชื่อสินค้า : </span>
+            <input autocomplete="off" required formControlName="name" type="text">
+        </p>
 
-    <img src="{{imageURL}}" alt="{{imageURL}}">
-    <p>
-        <span>url รูปภาพ : </span>
-        <input formControlName="image" (keyup)="imageInputOnchange($event.target)" type="text">
-    </p>
+        <img src="{{imageURL}}" alt="{{imageURL}}">
+        <p>
+            <span>url รูปภาพ : </span>
+            <input autocomplete="off" required formControlName="image" (keyup)="imageInputOnchange($event.target)" type="text">
+        </p>
 
-    <p>
-        <span>ราคา (บาท) : </span>
-        <input formControlName="price" type="number" min="1">
-    </p>
+        <p>
+            <span>ราคา (บาท) : </span>
+            <input autocomplete="off" required formControlName="price" type="number" min="1">
+        </p>
 
-    <p>
-        <span>ส่วนลด (%) : </span>
-        <input formControlName="discount" type="number" max="99" min="0">
-    </p>
+        <p>
+            <span>ส่วนลด (%) : </span>
+            <input autocomplete="off" required formControlName="discount" type="number" max="99" min="0">
+        </p>
 
-    <p>
-        <span>รายละเอียด : </span>
-        <input formControlName="description" type="text">
-    </p>
+        <p>
+            <span>รายละเอียด : </span>
+            <input autocomplete="off" required formControlName="description" type="text">
+        </p>
 
-    <p>
-        <span>ชื่อผู้ขาย : </span>
-        <input formControlName="seller" type="text">
-    </p>
+        <p>
+            <span>ชื่อผู้ขาย : </span>
+            <input autocomplete="off" required formControlName="seller" type="text">
+        </p>
 
-    <p>
-        <span>ประเภท : </span>
-        <input formControlName="category" type="text">
-    </p>
+        <p>
+            <span>ประเภท : </span>
+            <select formControlName="category">
+                <option value="เกี่ยวกับสัตว์เลี้ยง">เกี่ยวกับสัตว์เลี้ยง</option>
+                <option value="เครื่องใช้ไฟฟ้า">เครื่องใช้ไฟฟ้า</option>
+                <option value="ไอที">ไอที</option>
+                <option value="ของใช้ยิบย่อยในบ้าน">ของใช้ยิบย่อยในบ้าน</option>
+                <option value="ของใช้ส่วนตัว">ของใช้ส่วนตัว</option>
+                <option value="อื่นๆ">อื่นๆ</option>
+            </select>
+        </p>
 
-    <button (click)="submitNewProduct()">เพิ่มสินค้า</button>
-    <button routerLink="/">ยกเลิก</button>
-    
-    <!-- <input 
-        formControlName="borrower"
-        [class.invalid]="borrowMotorForm.controls['borrower'].invalid && (borrowMotorForm.controls['borrower'].touched || isSubmitPressed)"
-        type="text"
-        autocomplete="on"
-        placeholder="Enter borrower name"
-        required
-    > -->
+        <button type="submit">เพิ่มสินค้า</button>
+        <button type="reset" routerLink="/">ยกเลิก</button>
+    </form>
 </div>

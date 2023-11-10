@@ -1,11 +1,12 @@
 <div class="card-component" [routerLink]="['/', productObject.ID]">
     <img src="{{productObject.image}}" alt="รูปภาพ {{productObject.name}}">
-    <div class="text-product">
+    <div class="product-description">
         <h3>{{productObject.name}}</h3>
-        <p>{{productObject.seller}}</p>
-        <p class="inline">
-            <span [class.oldprice]="productObject.discount > 0">{{productObject.price}} บาท</span>
-            <span *ngIf="productObject.discount > 0" class="discount showdiscount">{{productObject.price * (1-(productObject.discount/100))}} บาท</span>
-        </p>
+        <p>ผู้ขาย : {{productObject.seller}}</p>
+        <p class="smalltext">ยอดขาย : {{productObject.salecount}} ชิ้น</p>
+
+        <hr>
+        <p class="price" [class.havediscount]="productObject.discount != productObject.price">{{productObject.price}} บาท</p>
+        <p class="discount" *ngIf="productObject.discount != productObject.price">{{productObject.discount}} บาท</p>
     </div>
 </div>

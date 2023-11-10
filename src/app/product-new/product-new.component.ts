@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ServiceService } from '../service.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 
@@ -31,7 +32,7 @@ export class ProductNewComponent implements OnInit  {
     discount: [99, Validators.required ],
     description: ['แมวลายสลิดตัวใหญ่', Validators.required ],
     seller: ['ปล่อยวัด', Validators.required ],
-    category: ['อื่นๆ', Validators.required ]
+    category: ['เกี่ยวกับสัตว์เลี้ยง', Validators.required ]
   });
 
   constructor(
@@ -61,6 +62,7 @@ export class ProductNewComponent implements OnInit  {
       piece: this.newProductForm.value.price!,
       category: this.newProductForm.value.category! as 'เกี่ยวกับสัตว์เลี้ยง' | 'เครื่องใช้ไฟฟ้า' | 'ไอที' | 'ของใช้ยิบย่อยในบ้าน' | 'ของใช้ส่วนตัว' | 'อื่นๆ'
     }
+    console.log(productObject);
     let response = await this.crudService.newProduct(productObject)
     console.log(response);
     Swal.fire({
