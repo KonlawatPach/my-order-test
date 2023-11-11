@@ -8,7 +8,7 @@ def initialDatabase():
   connect = sqlite3.connect(database_path)
   cursor = connect.cursor()
   sql_query = '''CREATE TABLE IF NOT EXISTS Product(
-                ID  INT PRIMARY KEY,
+                id  INT PRIMARY KEY,
                 name  TEXT,
                 image TEXT,
                 description TEXT,
@@ -34,7 +34,7 @@ def packList(dataList):
   newdata = []
   for d in dataList:
     newdata.append({
-      'ID' : d[0],
+      'id' : d[0],
       'name' : d[1],
       'image' : d[2],
       'description' : d[3],
@@ -119,7 +119,7 @@ def insertProduct():
   category = request_data['category']
 
   sql_query = ''' 
-                INSERT INTO Product(ID, name, image, description, seller, price, discount, piece, salecount, rating, ratingcount, category)
+                INSERT INTO Product(id, name, image, description, seller, price, discount, piece, salecount, rating, ratingcount, category)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, 0, 0, ?);
               '''
   cursor.execute(sql_query, (next_id, name, imageblob, description, seller, price, discount, piece, category,))
@@ -156,7 +156,7 @@ def updateProduct():
                     discount = ?,
                     piece = ?,
                     category = ?
-                WHERE ID = ?;
+                WHERE id = ?;
               '''
 
   cursor.execute(sql_query, (name, imageblob, description, seller, price, discount, piece, category, id_))
@@ -179,7 +179,7 @@ def updateSellCount():
 
   # get data with id
   databyid = connect.execute(
-    'SELECT piece, salecount, rating, ratingcount FROM Product WHERE id = ?;', (id_,)
+    'SELECT piece, salecount, rating, ratingcount, name FROM Product WHERE id = ?;', (id_,)
   )
   productData = list(databyid)[0]
 
@@ -201,28 +201,32 @@ def updateSellCount():
                       salecount = ?,
                       rating = ?, 
                       ratingcount = ?
-                  WHERE ID = ?;
+                  WHERE id = ?;
                 '''
 
     cursor.execute(sql_query, (new_piece, new_salecount, new_rating, new_ratingcount, id_))
     connect.commit()
     connect.close() 
-    return {'message' : "การซื้อสินค้า "+name+" สำเร็จ"}
+    return {'message' : "การซื้อสินค้า "+productData[4]+" สำเร็จ"}
   else:
-    return {'message' : "การซื้อ "+name+" เกิดข้อผิดพลาด"}
+    return {'message' : "การซื้อ "+productData[4]+" เกิดข้อผิดพลาด"}
 
 # delete product by id
 @app.route("/deleteproduct", methods = ['DELETE'])
 def deleteProduct():
-  # get id from req
-  request_data = request.get_json()
-  id_ = request_data['id']
-
+  id_ = request.args.get('id')
+  
   connect = sqlite3.connect(database_path)
-  connect.execute("DELETE from Product WHERE ID = ?;", (id_,))
+  # get data with id
+  databyid = connect.execute(
+    'SELECT name FROM Product WHERE id = ?;', (id_,)
+  )
+  productData = list(databyid)[0]
+
+  connect.execute("DELETE from Product WHERE id = ?;", (id_,))
   connect.commit()
   connect.close() 
-  return {'message' : "ลบสินค้า "+name+" สำเร็จ"}
+  return {'message' : "ลบสินค้า "+productData[0]+" สำเร็จ"}
 
 
 # DELETE TABLE
