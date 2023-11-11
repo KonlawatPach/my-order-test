@@ -1,4 +1,4 @@
-<div class="card-component" [routerLink]="['/', productObject.ID]">
+<div class="card-component" [routerLink]="['/', productObject.id]">
     <img src="{{productObject.image}}" alt="รูปภาพ {{productObject.name}}">
     <div class="product-description">
         <h3>{{productObject.name}}</h3>
@@ -6,7 +6,7 @@
         <p class="smalltext">ยอดขาย : {{productObject.salecount}} ชิ้น</p>
 
         <hr>
-        <p class="price" [class.havediscount]="productObject.discount != productObject.price">{{productObject.price}} บาท</p>
-        <p class="discount" *ngIf="productObject.discount != productObject.price">{{productObject.discount}} บาท</p>
+        <p class="price" [class.havediscount]="productObject.discount > 0">{{productObject.price}} บาท</p>
+        <p class="discount" *ngIf="productObject.discount > 0">{{priceDiscount}} บาท</p>
     </div>
 </div>

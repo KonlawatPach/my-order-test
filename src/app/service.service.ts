@@ -44,13 +44,13 @@ export class ServiceService {
   async getProductbyID(id : number){
     const url = this.prefixURL + `/getproduct?id=${id}`;
     const textResponse = await this.http.get(url, {responseType: 'text'}).toPromise();
-    return textResponse;
+    return JSON.parse(textResponse!)[0];
   }
 
   async getProductbyCategory(category : string){
     const url = this.prefixURL + `/getproductlist?category=${category}`;
     const textResponse = await this.http.get(url, {responseType: 'text'}).toPromise();
-    return textResponse;
+    return JSON.parse(textResponse!);
   }
 
 
@@ -96,17 +96,14 @@ export class ServiceService {
   }
 
   async deleteProductbyId(id : number){
-    var body = JSON.stringify({
-      "id" : id
-    });
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
         'Accept' : 'application/json'
       })
     };
-    const url = this.prefixURL + "/deleteproduct";
-    return await this.http.post<any>(url, body, httpOptions).toPromise();
+    const url = this.prefixURL + `/deleteproduct?id=${id}`;
+    return await this.http.delete<any>(url, httpOptions).toPromise();
   }
   
 }

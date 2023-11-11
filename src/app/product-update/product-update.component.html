@@ -1,1 +1,110 @@
-<p>product-update works!</p>
+<div class="update-product-component">
+    <h2>แก้ไขสินค้า {{oldProductData.name}}</h2>
+    <div >
+        
+        <form [formGroup]="updateProductForm" (ngSubmit)="submitUpdateProduct()">
+            <div class="two-column">
+                <img class="width-screen-image" src="{{imageURL}}" alt="URL ที่ระบุไม่มีภาพของสินค้า">
+                <div class="forminput">
+                    <img class="mobile-screen-image" src="{{imageURL}}" alt="URL ที่ระบุไม่มีภาพของสินค้า">
+
+                    <p class="alert-text" *ngIf="updateProductForm.controls['name'].invalid && updateProductForm.controls['name'].touched">**กรุณาระบุชื่อสินค้า**</p>
+                    <p>
+                        <span>ชื่อสินค้า : </span>
+                        <input 
+                            autocomplete="off" 
+                            required 
+                            formControlName="name" 
+                            type="text"
+                            [class.invalid]="updateProductForm.controls['name'].invalid && updateProductForm.controls['name'].touched"
+                        >
+                    </p>
+                    
+                    <p class="alert-text" *ngIf="updateProductForm.controls['image'].invalid && updateProductForm.controls['image'].touched">**กรุณาระบุ URL รูปภาพ**</p>
+                    <p>
+                        <span>url รูปภาพ : </span>
+                        <input
+                            autocomplete="off"
+                            required
+                            formControlName="image"
+                            (keyup)="imageInputOnchange($event.target)"
+                            type="text"
+                            [class.invalid]="updateProductForm.controls['image'].invalid && updateProductForm.controls['image'].touched"
+                        >
+                    </p>
+                    
+                    <p class="alert-text" *ngIf="updateProductForm.controls['price'].invalid && updateProductForm.controls['price'].touched">**กรุณาระบุราคา (ต้องมีค่ามากกว่า 0)**</p>
+                    <p>
+                        <span>ราคา (บาท) : </span>
+                        <input 
+                            autocomplete="off" 
+                            required 
+                            formControlName="price" 
+                            type="number" 
+                            min="1"
+                            [class.invalid]="updateProductForm.controls['price'].invalid && updateProductForm.controls['price'].touched"
+                        >
+                    </p>
+                    
+                    <p class="alert-text" *ngIf="updateProductForm.controls['discount'].invalid && updateProductForm.controls['discount'].touched">**กรุณาระบุส่วนลด (ระหว่าง 0 ถึง 99)**</p>
+                    <p>
+                        <span>ส่วนลด (%) : </span>
+                        <input 
+                            autocomplete="off" 
+                            required 
+                            formControlName="discount" 
+                            type="number" 
+                            max="99" 
+                            min="0"
+                            [class.invalid]="updateProductForm.controls['discount'].invalid && updateProductForm.controls['discount'].touched"
+                        >
+                    </p>
+                    
+                    <p class="alert-text" *ngIf="updateProductForm.controls['description'].invalid && updateProductForm.controls['description'].touched">**กรุณาระบุรายละเอียด**</p>
+                    <p>
+                        <span>รายละเอียด : </span>
+                        <textarea 
+                            autocomplete="off" 
+                            required 
+                            formControlName="description" 
+                            type="text"
+                            [class.invalid]="updateProductForm.controls['description'].invalid && updateProductForm.controls['description'].touched"
+                        ></textarea>
+                    </p>
+                    
+                    <p class="alert-text" *ngIf="updateProductForm.controls['seller'].invalid && updateProductForm.controls['seller'].touched">**กรุณาระบุชื่อผู้ขาย**</p>
+                    <p>
+                        <span>ชื่อผู้ขาย : </span>
+                        <input 
+                            autocomplete="off" 
+                            required 
+                            formControlName="seller" 
+                            type="text"
+                            [class.invalid]="updateProductForm.controls['seller'].invalid && updateProductForm.controls['seller'].touched"
+                        >
+                    </p>
+                    
+                    <p>
+                        <span>ประเภท : </span>
+                        <select formControlName="category">
+                            <option value="เกี่ยวกับสัตว์เลี้ยง">เกี่ยวกับสัตว์เลี้ยง</option>
+                            <option value="เครื่องใช้ไฟฟ้า">เครื่องใช้ไฟฟ้า</option>
+                            <option value="ไอที">ไอที</option>
+                            <option value="ของใช้ยิบย่อยในบ้าน">ของใช้ยิบย่อยในบ้าน</option>
+                            <option value="ของใช้ส่วนตัว">ของใช้ส่วนตัว</option>
+                            <option value="อื่นๆ">อื่นๆ</option>
+                        </select>
+                    </p>
+                </div>
+            </div>
+
+            <div class="button-bar">
+                <button type="submit">แก้ไขข้อมูลสินค้า</button>
+                <button type="menu" [routerLink]="['/', oldProductData.id]">ยกเลิก</button>
+            </div>
+            <div class="button-bar">
+                <button type="reset" (click)="deleteProduct()">ลบสินค้าชิ้นนี้</button>
+            </div>
+        </form>
+    </div>
+</div>

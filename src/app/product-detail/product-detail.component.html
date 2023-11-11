@@ -1,1 +1,35 @@
-<p>product-detail works!</p>
+<div class="product-detail-component">        
+    <div class="two-column">
+        <img class="width-screen-image" src="{{productData.image}}" alt="ภาพสินค้า {{productData.name}}">
+        <div class="forminput">
+            <img class="mobile-screen-image" src="{{productData.image}}" alt="URL ที่ระบุไม่มีภาพของสินค้า">
+
+            <p class="nameProduct">ชื่อสินค้า : {{productData.name}}</p>
+            
+            <p>
+                <span [class.oldprice]="productData.discount > 0">ราคา {{productData.price}} บาท</span>
+                &nbsp;
+                <span class="newprice" *ngIf="productData.discount > 0">ราคา {{discountNewPrice}} บาท</span>
+                <br>
+                <span class="discount" *ngIf="productData.discount > 0">ลด {{productData.discount}} %</span>
+            </p>
+            
+            <p>ชื่อผู้ขาย : {{productData.seller}}</p>
+            
+            <p>ประเภท : {{productData.category}}</p>
+
+            <p>สินค้าเหลืออยู่ : {{productData.piece}}</p>
+
+            <p class="cart-menu">
+                <button (click)="addCart()">+</button>
+                <input id="cartnum" #cartnum type="number" [value]="cartNumber" (change)="checkCartNumber(cartnum.value)">
+                <button (click)="deleteCart()">-</button>
+                ชิ้น
+            </p>
+
+            <p><button [disabled]="cartNumber<=0" class="submit-cart">ซื้อของเลย (ไม่ระบุที่อยู่)</button></p>
+        </div>
+    </div>
+    <p class="description">รายละเอียด : {{productData.description}}</p>
+    <button class="update-button" [routerLink]="'/updateproduct/'+this.productData.id">แก้ไขข้อมูล</button>
+</div>
