@@ -1,3 +1,33 @@
+<div [style.opacity]="opacityPopup" class="madal-background" *ngIf="showPopup">
+    <div [style.width]="popUpwidth + 'px'" class="modal-content">
+        <h4>ซื้อสินค้า {{productData.name}} จำนวน {{cartNumber}} ชิ้น</h4>
+        <p>กรุณาให้คะแนนสินค้า</p>
+        
+        <p class="star-vote">
+            <svg (click)="voteStar(1)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 245">
+                <path [style.fill]="starPoint > 0 ? '#ED8A19' : '#000000'" d="m56,237 74-228 74,228L10,96h240"/>
+            </svg>
+            <svg (click)="voteStar(2)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 245">
+                <path [style.fill]="starPoint > 1 ? '#ED8A19' : '#000000'" d="m56,237 74-228 74,228L10,96h240"/>
+            </svg>
+            <svg (click)="voteStar(3)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 245">
+                <path [style.fill]="starPoint > 2 ? '#ED8A19' : '#000000'" d="m56,237 74-228 74,228L10,96h240"/>
+            </svg>
+            <svg (click)="voteStar(4)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 245">
+                <path [style.fill]="starPoint > 3 ? '#ED8A19' : '#000000'" d="m56,237 74-228 74,228L10,96h240"/>
+            </svg>
+            <svg (click)="voteStar(5)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 245">
+                <path [style.fill]="starPoint > 4 ? '#ED8A19' : '#000000'" d="m56,237 74-228 74,228L10,96h240"/>
+            </svg>
+        </p>
+
+        <p class="button-bar">            
+            <button class="submit-cart" (click)="buyProduct()">{{starPoint == 0 ? 'ยืนยันโดยไม่ให้คะแนน' : 'ยืนยัน'}}</button>
+            <button class="cancel-cart" (click)="openPopup()">ยกเลิก</button>
+        </p>
+    </div>
+</div>
+
 <div class="product-detail-component">        
     <div class="two-column">
         <img class="width-screen-image" src="{{productData.image}}" alt="ภาพสินค้า {{productData.name}}">
@@ -27,7 +57,26 @@
                 ชิ้น
             </p>
 
-            <p><button [disabled]="cartNumber<=0" class="submit-cart">ซื้อของเลย (ไม่ระบุที่อยู่)</button></p>
+            <p><button [disabled]="cartNumber<=0" class="submit-cart" (click)="submitCart()">ซื้อของเลย (ไม่ระบุที่อยู่)</button></p>
+
+            <p class="star-vote">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 245">
+                    <path [style.fill]="productData.rating > 0 ? '#ED8A19' : '#000000'" d="m56,237 74-228 74,228L10,96h240"/>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 245">
+                    <path [style.fill]="productData.rating > 1 ? '#ED8A19' : '#000000'" d="m56,237 74-228 74,228L10,96h240"/>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 245">
+                    <path [style.fill]="productData.rating > 2 ? '#ED8A19' : '#000000'" d="m56,237 74-228 74,228L10,96h240"/>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 245">
+                    <path [style.fill]="productData.rating > 3 ? '#ED8A19' : '#000000'" d="m56,237 74-228 74,228L10,96h240"/>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 245">
+                    <path [style.fill]="productData.rating > 4 ? '#ED8A19' : '#000000'" d="m56,237 74-228 74,228L10,96h240"/>
+                </svg>
+            </p>
+            <p>{{productData.rating.toFixed(2)}} คะแนน</p>
         </div>
     </div>
     <p class="description">รายละเอียด : {{productData.description}}</p>

@@ -5,4 +5,10 @@ body{
     background-color: rgb(255, 244, 230);
     padding: 0;
     margin: 0;
+
+    input, button, textarea{
+        font-family: 'Mitr', serif;
+    }
+
+    padding-bottom: 20px;
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ServiceService } from '../service.service';
+import Swal from 'sweetalert2';
 
 interface ProductObject {
   id : number,
@@ -42,9 +43,15 @@ export class ProductDetailComponent implements OnInit {
   public discountNewPrice : string = '0';
   public cartNumber : number = 0;
 
+  public showPopup : boolean = false;
+  public opacityPopup : number = 0;
+  public popUpwidth : number = 0;
+  public starPoint : number = 0;
+
   constructor(
     private route: ActivatedRoute,
     private crudService: ServiceService,
+    private router: Router
   ) {}
 
   async ngOnInit() {
@@ -77,5 +84,39 @@ export class ProductDetailComponent implements OnInit {
       this.cartNumber = Number(cartnumfield);
     }
     (<HTMLInputElement>document.getElementById("cartnum")).value = String(this.cartNumber);
+  }
+
+  openPopup(){
+    if(!this.showPopup){
+      this.showPopup = true;
+      setTimeout(() => {
+        this.opacityPopup = 1;
+        this.popUpwidth = 360;
+      }, 200)
+    }
+    else if(this.showPopup){
+      this.opacityPopup = 0;
+      this.popUpwidth = 0;
+      this.starPoint = 0;
+
+      setTimeout(() => {
+        this.showPopup = false;
+      }, 200)
+    }
+  }
+  submitCart(){
+    this.openPopup()
+  }
+  voteStar(clickPointStar : number){
+    this.starPoint = clickPointStar;
+  }
+  async buyProduct(){
+    let response = await this.crudService.updateSellCount(this.productData.id, this.cartNumber, this.starPoint)
+    console.log(response);
+    Swal.fire({
+        icon : "success",
+        text : response.message
+    });
+    this.router.navigate(['/'])
   }
 }

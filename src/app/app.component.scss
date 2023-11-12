@@ -1,0 +1,13 @@
+.navbar{
+    height: 140px;
+
+    app-navbar{
+        z-index: 0;
+        position: absolute;
+        width: 100vw;
+        top: 0;
+    }
+    @media only screen and (max-width: 1080px) {
+        height: 180px;
+    }   
+}

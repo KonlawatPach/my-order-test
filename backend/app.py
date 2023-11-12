@@ -178,13 +178,13 @@ def updateSellCount():
   rating = request_data['rating']
 
   # get data with id
-  databyid = connect.execute(
+  databyid = list(connect.execute(
     'SELECT piece, salecount, rating, ratingcount, name FROM Product WHERE id = ?;', (id_,)
-  )
-  productData = list(databyid)[0]
+  ))
 
   # check product and update value
-  if(productData[0] > 0 and productData[0] - salecount <= 0):
+  if(len(databyid)>0 and databyid[0][0] > 0 and databyid[0][0] - salecount >= 0):
+    productData = list(databyid)[0]
     new_piece = productData[0] - salecount
     new_salecount = productData[1] + salecount
 
