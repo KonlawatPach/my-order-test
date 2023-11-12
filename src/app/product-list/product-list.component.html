@@ -1,15 +1,15 @@
 <div class="product-list-component">
     <div class="top-menu">
         <button routerLink="/newproduct">+ เพิ่มสินค้าใหม่ของคุณ</button>
-        <div>
+        <div class="select-bar">
             <select (change)="changeSort($event.target)">
                 <option value="name">ชื่อ</option>
-                <option value="ราคา">ราคา</option>
+                <option value="price">ราคา</option>
             </select>
             
             <select (change)="changeOrder($event.target)">
-                <option value="ASC">มากไปน้อย</option>
-                <option value="DESC">น้อยไปมาก</option>
+                <option value="ASC">น้อยไปมาก</option>
+                <option value="DESC">มากไปน้อย</option>
             </select>
         </div>
     </div>

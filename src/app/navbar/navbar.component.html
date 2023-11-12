@@ -1,15 +1,15 @@
 <div class="navbar-component">
     <img routerLink="/" src="assets/shopeed_logo.png" class="icon-img"  alt="shopeed_logo">
     <div class="right-side">
-        <input type="text" class="input-bar">
+        <h4 class="description-website">ยินดีต้อนรับเข้าสู่เว็บไซต์ Shopeed เว็บไซต์ฝากของขายที่สามารถเพิ่มสินค้า แก้ไขและลบสินค้าได้โดยไม่ต้องลงทะเบียนหรือล็อกอินเลย สามารถเลือกซื้อสินค้าและให้คะแนนสินค้าได้เต็มที่</h4>
         <p>ประเภทสินค้ายอดนิยม</p>
         <div class="category-list">
-            <a>เกี่ยวกับสัตว์เลี้ยง</a>
-            <a>เครื่องใช้ไฟฟ้า</a>
-            <a>ไอที</a>
-            <a>ของใช้ยิบย่อยในบ้าน</a>
-            <a>ของใช้ส่วนตัว</a>
-            <a>อื่นๆ</a>
+            <a [routerLink]="['']" [queryParams]="{ category: 'เกี่ยวกับสัตว์เลี้ยง' }">เกี่ยวกับสัตว์เลี้ยง</a>
+            <a [routerLink]="['']" [queryParams]="{ category: 'เครื่องใช้ไฟฟ้า' }">เครื่องใช้ไฟฟ้า</a>
+            <a [routerLink]="['']" [queryParams]="{ category: 'ไอที' }">ไอที</a>
+            <a [routerLink]="['']" [queryParams]="{ category: 'ของใช้ยิบย่อยในบ้าน' }">ของใช้ยิบย่อยในบ้าน</a>
+            <a [routerLink]="['']" [queryParams]="{ category: 'ของใช้ส่วนตัว' }">ของใช้ส่วนตัว</a>
+            <a [routerLink]="['']" [queryParams]="{ category: 'อื่นๆ' }">อื่นๆ</a>
         </div>
     </div>
 </div>
