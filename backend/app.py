@@ -2,7 +2,7 @@ import sqlite3
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
-database_path = './backend/test.db'
+database_path = './test.db'
 
 def initialDatabase():
   connect = sqlite3.connect(database_path)
@@ -249,4 +249,4 @@ def deleteTable():
 
 if __name__ == '__main__':
   initialDatabase()
-  app.run(debug = False)
+  app.run(debug = False, host='0.0.0.0')

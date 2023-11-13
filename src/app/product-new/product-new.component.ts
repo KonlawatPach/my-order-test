@@ -25,13 +25,13 @@ export class ProductNewComponent implements OnInit  {
   public imageURL:string = '';
 
   newProductForm = this.formBuilder.group({
-    name: ['salid cat', Validators.required ],
+    name: ['', Validators.required ],
     image: ['', Validators.required ],
-    price: [99999, [Validators.required, Validators.min(0)]],
-    discount: [99, [Validators.required, Validators.min(0), Validators.max(99)]],
-    description: ['แมวลายสลิดตัวใหญ่', Validators.required ],
-    seller: ['ปล่อยวัด', Validators.required ],
-    category: ['เกี่ยวกับสัตว์เลี้ยง', Validators.required ]
+    price: [1, [Validators.required, Validators.min(0)]],
+    discount: [0, [Validators.required, Validators.min(0), Validators.max(99)]],
+    description: ['', Validators.required ],
+    seller: ['', Validators.required ],
+    category: ['', Validators.required ]
   });
 
   constructor(
