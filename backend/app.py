@@ -96,73 +96,79 @@ def selectProductwithCategory():
 # new product
 @app.route("/newproduct", methods = ['POST'])
 def insertProduct():
-  connect = sqlite3.connect(database_path)
-  cursor = connect.cursor()
+  try:
+    connect = sqlite3.connect(database_path)
+    cursor = connect.cursor()
 
-  # check last id
-  data = connect.execute('SELECT * FROM Product ORDER BY id DESC;')
-  data = list(data)
-  if(len(data) > 0):
-    next_id = data[0][0] + 1
-  else:
-    next_id = 0
+    # check last id
+    data = connect.execute('SELECT * FROM Product ORDER BY id DESC;')
+    data = list(data)
+    if(len(data) > 0):
+      next_id = data[0][0] + 1
+    else:
+      next_id = 0
 
-  # get data
-  request_data = request.get_json()
-  name = request_data['name']
-  imageblob = request_data['image']
-  description = request_data['description']
-  seller = request_data['seller']
-  price = request_data['price']
-  discount = request_data['discount']
-  piece = request_data['piece']
-  category = request_data['category']
+    # get data
+    request_data = request.get_json()
+    name = request_data['name']
+    imageblob = request_data['image']
+    description = request_data['description']
+    seller = request_data['seller']
+    price = request_data['price']
+    discount = request_data['discount']
+    piece = request_data['piece']
+    category = request_data['category']
 
-  sql_query = ''' 
-                INSERT INTO Product(id, name, image, description, seller, price, discount, piece, salecount, rating, ratingcount, category)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, 0, 0, ?);
-              '''
-  cursor.execute(sql_query, (next_id, name, imageblob, description, seller, price, discount, piece, category,))
-  connect.commit()
-  connect.close() 
+    sql_query = ''' 
+                  INSERT INTO Product(id, name, image, description, seller, price, discount, piece, salecount, rating, ratingcount, category)
+                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, 0, 0, ?);
+                '''
+    cursor.execute(sql_query, (next_id, name, imageblob, description, seller, price, discount, piece, category,))
+    connect.commit()
+    connect.close() 
 
-  return {'message' : "เพิ่มสินค้า "+name+" สำเร็จ"}
+    return {'message' : "เพิ่มสินค้า "+name+" สำเร็จ"}
+  except:
+    return {'message' : "การเพิ่มสินค้า เกิดข้อผิดพลาด"}
 
 
 # update product data
 @app.route("/updateproduct", methods = ['POST'])
 def updateProduct():
-  # get data from req
-  request_data = request.get_json()
-  id_ = request_data['id']
-  name = request_data['name']
-  imageblob = request_data['image']
-  description = request_data['description']
-  seller = request_data['seller']
-  price = request_data['price']
-  discount = request_data['discount']
-  piece = request_data['piece']
-  category = request_data['category']
+  try:
+    # get data from req
+    request_data = request.get_json()
+    id_ = request_data['id']
+    name = request_data['name']
+    imageblob = request_data['image']
+    description = request_data['description']
+    seller = request_data['seller']
+    price = request_data['price']
+    discount = request_data['discount']
+    piece = request_data['piece']
+    category = request_data['category']
 
-  connect = sqlite3.connect(database_path)
-  cursor = connect.cursor()
-  sql_query = ''' 
-                UPDATE Product
-                SET name = ?, 
-                    image = ?, 
-                    description = ?, 
-                    seller = ?, 
-                    price = ?, 
-                    discount = ?,
-                    piece = ?,
-                    category = ?
-                WHERE id = ?;
-              '''
+    connect = sqlite3.connect(database_path)
+    cursor = connect.cursor()
+    sql_query = ''' 
+                  UPDATE Product
+                  SET name = ?, 
+                      image = ?, 
+                      description = ?, 
+                      seller = ?, 
+                      price = ?, 
+                      discount = ?,
+                      piece = ?,
+                      category = ?
+                  WHERE id = ?;
+                '''
 
-  cursor.execute(sql_query, (name, imageblob, description, seller, price, discount, piece, category, id_))
-  connect.commit()
-  connect.close() 
-  return {'message' : "อัพเดทสินค้า "+name+" สำเร็จ"}
+    cursor.execute(sql_query, (name, imageblob, description, seller, price, discount, piece, category, id_))
+    connect.commit()
+    connect.close() 
+    return {'message' : "อัพเดทสินค้า "+name+" สำเร็จ"}
+  except:
+    return {'message' : "การอัพเดทสินค้า เกิดข้อผิดพลาด"}
 
 
 # update sellcount ขายได้มาใช้ตัวนี้
@@ -214,19 +220,22 @@ def updateSellCount():
 # delete product by id
 @app.route("/deleteproduct", methods = ['DELETE'])
 def deleteProduct():
-  id_ = request.args.get('id')
-  
-  connect = sqlite3.connect(database_path)
-  # get data with id
-  databyid = connect.execute(
-    'SELECT name FROM Product WHERE id = ?;', (id_,)
-  )
-  productData = list(databyid)[0]
+  try:
+    id_ = request.args.get('id')
+    
+    connect = sqlite3.connect(database_path)
+    # get data with id
+    databyid = connect.execute(
+      'SELECT name FROM Product WHERE id = ?;', (id_,)
+    )
+    productData = list(databyid)[0]
 
-  connect.execute("DELETE from Product WHERE id = ?;", (id_,))
-  connect.commit()
-  connect.close() 
-  return {'message' : "ลบสินค้า "+productData[0]+" สำเร็จ"}
+    connect.execute("DELETE from Product WHERE id = ?;", (id_,))
+    connect.commit()
+    connect.close() 
+    return {'message' : "ลบสินค้า "+productData[0]+" สำเร็จ"}
+  except:
+    return {'message' : "การลบสินค้าเกิดข้อผิดพลาด"}
 
 
 # DELETE TABLE
